@@ -115,7 +115,8 @@ export function ContactForm({
             className="size-4 accent-accent"
           />
           <span className="text-muted">
-            Mobile at your location (we use your water &amp; power hookups)
+            Mobile at your location — you as the client (we use your water
+            &amp; power hookups)
           </span>
         </label>
         <label className="flex cursor-pointer items-center gap-3 text-sm">
@@ -125,7 +126,9 @@ export function ContactForm({
             value="dropoff"
             className="size-4 accent-accent"
           />
-          <span className="text-muted">Drop-off at my home (by appointment)</span>
+          <span className="text-muted">
+            Drop-off at my home — Seattle Shine owner (by appointment)
+          </span>
         </label>
       </fieldset>
 

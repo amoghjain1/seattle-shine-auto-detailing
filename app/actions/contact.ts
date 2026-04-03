@@ -70,8 +70,8 @@ export async function submitContact(
     `Add-ons: ${addOnLine}`,
     `Service: ${
       serviceType === "dropoff"
-        ? "Drop-off at detailer (by appointment)"
-        : "Mobile at your location (we use your water & power hookups)"
+        ? "Drop-off at my home — Seattle Shine owner (by appointment)"
+        : "Mobile at your location — you as the client (we use your water & power hookups)"
     }`,
     "",
     notes ? `Notes:\n${notes}` : "",
