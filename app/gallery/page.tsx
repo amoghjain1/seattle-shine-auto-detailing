@@ -56,6 +56,15 @@ export default async function GalleryPage() {
         </Container>
       </section>
 
+      <section className="border-b border-border/60 py-16 sm:py-20">
+        <Container>
+          <h2 className="mb-8 font-display text-2xl font-semibold text-foreground sm:text-3xl">
+            Photos
+          </h2>
+          <GalleryGrid items={items} />
+        </Container>
+      </section>
+
       <section className="border-y border-border/50 bg-surface/20 py-16 sm:py-24">
         <Container>
           <div className="mx-auto mb-12 max-w-2xl text-center">
@@ -70,15 +79,6 @@ export default async function GalleryPage() {
             </p>
           </div>
           <DetailVideoSlider sources={DETAIL_VIDEO_SOURCES} embeddedInGallery />
-        </Container>
-      </section>
-
-      <section className="py-16 sm:py-20">
-        <Container>
-          <h2 className="mb-8 font-display text-2xl font-semibold text-foreground sm:text-3xl">
-            Photos
-          </h2>
-          <GalleryGrid items={items} />
         </Container>
       </section>
     </>
