@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/container";
+import { AboutBlockMotion, AboutHeroMotion } from "@/components/about-page-motion";
 import { site } from "@/lib/site";
 import Link from "next/link";
 
@@ -11,20 +12,19 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="border-b border-border/60 bg-surface/20 py-16 sm:py-20">
-        <Container>
-          <p className="text-sm font-semibold uppercase tracking-wider text-accent">
-            About
-          </p>
-          <h1 className="mt-3 max-w-3xl font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-            Obsessed with clarity, cleanliness, and longevity
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-muted">{site.description}</p>
-        </Container>
-      </section>
+      <AboutHeroMotion>
+        <p className="text-sm font-semibold uppercase tracking-wider text-accent">
+          About
+        </p>
+        <h1 className="mt-3 max-w-3xl font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          Obsessed with clarity, cleanliness, and longevity
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg text-muted">{site.description}</p>
+      </AboutHeroMotion>
 
       <section className="py-16 sm:py-20">
         <Container className="mx-auto max-w-3xl space-y-10 text-muted">
+          <AboutBlockMotion>
           <div className="space-y-4">
             <h2 className="font-display text-2xl font-semibold text-foreground">
               Our story
@@ -45,6 +45,8 @@ export default function AboutPage() {
               {site.servedAreas}.
             </p>
           </div>
+          </AboutBlockMotion>
+          <AboutBlockMotion delay={0.06}>
           <div className="space-y-4">
             <h2 className="font-display text-2xl font-semibold text-foreground">
               How we work with you
@@ -62,6 +64,8 @@ export default function AboutPage() {
               appointment</strong> — same standards, flexible scheduling.
             </p>
           </div>
+          </AboutBlockMotion>
+          <AboutBlockMotion delay={0.1}>
           <div className="space-y-4">
             <h2 className="font-display text-2xl font-semibold text-foreground">
               Quality bar
@@ -78,6 +82,8 @@ export default function AboutPage() {
               begin.
             </p>
           </div>
+          </AboutBlockMotion>
+          <AboutBlockMotion delay={0.12}>
           <div className="rounded-2xl border border-border/80 bg-surface/40 p-8">
             <p className="font-display text-lg text-foreground">
               Ready when you are.
@@ -102,6 +108,7 @@ export default function AboutPage() {
               </a>
             </div>
           </div>
+          </AboutBlockMotion>
         </Container>
       </section>
     </>

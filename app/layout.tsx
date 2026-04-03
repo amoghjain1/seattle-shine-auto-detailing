@@ -4,6 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { BackToTop } from "@/components/back-to-top";
+import { MobileBookingBar } from "@/components/mobile-booking-bar";
 import { site } from "@/lib/site";
 
 const dmSans = DM_Sans({
@@ -82,8 +84,12 @@ export default function RootLayout({
         />
         <ThemeProvider>
           <SiteHeader />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-0">
+            {children}
+          </main>
           <SiteFooter />
+          <BackToTop />
+          <MobileBookingBar />
         </ThemeProvider>
       </body>
     </html>

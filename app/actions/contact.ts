@@ -90,12 +90,18 @@ export async function submitContact(
     };
   }
 
+  const from =
+    process.env.RESEND_FROM_EMAIL ?? "Seattle Shine <onboarding@resend.dev>";
+  // Resend test sender only allows delivering to the account owner inbox; a
+  // customer `replyTo` triggers validation_error (403). Omit until you verify a
+  // domain and use a `from` on that domain.
+  const sandboxFrom = /onboarding@resend\.dev/i.test(from);
+
   const resend = new Resend(apiKey);
   const { error } = await resend.emails.send({
-    from:
-      process.env.RESEND_FROM_EMAIL ?? "Seattle Shine <onboarding@resend.dev>",
+    from,
     to: [to],
-    replyTo: email,
+    ...(sandboxFrom ? {} : { replyTo: email }),
     subject: `New detail request from ${name}`,
     text: body,
   });

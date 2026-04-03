@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/cn";
 import type { PackageId } from "@/lib/packages";
 
@@ -19,8 +22,15 @@ export function PricingCard({
   featured?: boolean;
   featuredBadge?: string;
 }) {
+  const reduce = useReducedMotion();
+
   return (
-    <article
+    <motion.article
+      initial={reduce ? false : { opacity: 0, y: 20 }}
+      whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={reduce ? undefined : { y: -4 }}
       className={cn(
         "relative flex flex-col rounded-2xl border bg-background p-6 shadow-sm transition hover:shadow-md",
         featured
@@ -64,6 +74,6 @@ export function PricingCard({
           Book now
         </Link>
       </div>
-    </article>
+    </motion.article>
   );
 }

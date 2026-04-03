@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Container } from "@/components/container";
 import { site } from "@/lib/site";
 import { packages } from "@/lib/packages";
@@ -26,6 +26,8 @@ const reasons = [
 ];
 
 export function HomeWhyChoose() {
+  const reduce = useReducedMotion();
+
   return (
     <section className="border-t border-border/60 bg-surface/30 py-20">
       <Container>
@@ -48,7 +50,8 @@ export function HomeWhyChoose() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.4 }}
-              className="rounded-2xl border border-border/80 bg-background p-6 shadow-sm"
+              whileHover={reduce ? undefined : { y: -4, transition: { duration: 0.2 } }}
+              className="rounded-2xl border border-border/80 bg-background p-6 shadow-sm transition-shadow hover:shadow-md"
             >
               <h3 className="font-display text-lg font-semibold text-foreground">
                 {item.title}
@@ -63,6 +66,8 @@ export function HomeWhyChoose() {
 }
 
 export function HomePackageTeasers() {
+  const reduce = useReducedMotion();
+
   return (
     <section className="py-20">
       <Container>
@@ -76,12 +81,18 @@ export function HomePackageTeasers() {
               maintenance wash to full interior resets and protective finishes.
             </p>
           </div>
-          <Link
-            href="/services"
-            className="inline-flex shrink-0 items-center justify-center rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-surface"
+          <motion.div
+            whileHover={reduce ? undefined : { scale: 1.02 }}
+            whileTap={reduce ? undefined : { scale: 0.98 }}
+            className="shrink-0"
           >
-            View all services
-          </Link>
+            <Link
+              href="/services"
+              className="inline-flex items-center justify-center rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-surface"
+            >
+              View all services
+            </Link>
+          </motion.div>
         </div>
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           {packages.map((p, i) => (
@@ -91,6 +102,7 @@ export function HomePackageTeasers() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.06, duration: 0.45 }}
+              whileHover={reduce ? undefined : { y: -5, transition: { duration: 0.22 } }}
               className={
                 p.featured
                   ? "flex flex-col rounded-2xl border border-accent/50 bg-accent/[0.04] p-6 shadow-glow ring-1 ring-accent/20"
