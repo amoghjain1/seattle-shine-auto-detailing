@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Seattle Shine Auto Detailing
 
-## Getting Started
+Marketing site for **Seattle Shine Auto Detailing** — Next.js (App Router), Tailwind CSS, dark/light theme, contact form (Resend), and Instagram gallery support (Graph API or static JSON).
 
-First, run the development server:
+## Local development
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Hero photos + video slider
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Rotating hero backdrop:** Add stills under `public/hero/photos/` and list paths in [`lib/hero-media.ts`](lib/hero-media.ts) as **`HERO_PHOTO_SOURCES`**. If that list is **empty**, only **`HERO_FALLBACK_IMAGE`** is shown. Images also support **Unsplash-style URLs** if listed in `next.config.ts` `remotePatterns`. Auto-rotation pauses for visitors who prefer **reduced motion** (first image only).
+- **Edit clips (gallery slider):** Keep `.mov` / `.mp4` files under `public/hero/` and list them in **`DETAIL_VIDEO_SOURCES`** in `lib/hero-media.ts`. The **`/gallery`** page includes a video carousel with prev/next, keyboard arrows, and clip indicators.
 
-## Learn More
+## Environment variables
 
-To learn more about Next.js, take a look at the following resources:
+See [`.env.example`](.env.example) for `NEXT_PUBLIC_SITE_URL`, Resend keys, and Instagram (`INSTAGRAM_ACCESS_TOKEN`, `INSTAGRAM_USER_ID`, optional `INSTAGRAM_STATIC_GALLERY_JSON`).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Contact email:** Without `RESEND_API_KEY`, submissions log to the server console and the form still shows a success message (demo mode).
+- **Instagram:** Use a Business/Creator account with a Facebook Page and a long‑lived token with permission to read media. Set `INSTAGRAM_USER_ID` to the Instagram business account id from the Graph API explorer. Refresh tokens before expiry (~60 days) or wire a refresh flow later.
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Push this repo to GitHub (or GitLab/Bitbucket).
+2. In [Vercel](https://vercel.com/new), import the repo; framework preset **Next.js**.
+3. Add environment variables from `.env.example` in **Project → Settings → Environment Variables**.
+4. Set `NEXT_PUBLIC_SITE_URL` to your production URL (e.g. `https://seattleshine.com`) for correct metadata and JSON-LD.
+5. Under **Domains**, connect your registrar’s DNS per Vercel’s instructions.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Production build:
+
+```bash
+npm run build
+```
+
+## Project structure
+
+- `app/` — Routes (`/`, `/services`, `/gallery`, `/about`, `/contact`), `app/actions/contact.ts` (server action), `app/api/instagram` (debug JSON).
+- `components/` — Header, footer, hero, forms, gallery.
+- `lib/site.ts`, `lib/packages.ts`, `lib/instagram.ts` — Copy and data helpers.
