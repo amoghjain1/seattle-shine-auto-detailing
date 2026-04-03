@@ -16,14 +16,15 @@ export function GalleryGrid({ items }: { items: InstagramMediaItem[] }) {
           Gallery connected soon
         </p>
         <p className="mx-auto mt-3 max-w-md text-sm text-muted">
-          Connect your Instagram Graph API token to show your latest work
-          here, or add{" "}
+          Add photos under{" "}
+          <code className="rounded bg-surface px-1 text-xs">public/gallery/</code>{" "}
+          and set{" "}
           <code className="rounded bg-surface px-1 text-xs">
             INSTAGRAM_STATIC_GALLERY_JSON
           </code>{" "}
-          for manual images — see{" "}
+          (see{" "}
           <code className="rounded bg-surface px-1 text-xs">.env.example</code>
-          .
+          ), or connect Instagram Graph API later.
         </p>
         <a
           href={site.instagramUrl}
