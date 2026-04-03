@@ -4,12 +4,14 @@ import { HomeStats } from "@/components/home-stats";
 import { HomeResultsCta } from "@/components/home-results-cta";
 import { HomeFaq } from "@/components/home-faq";
 import { HomeCtaStrip } from "@/components/home-cta-strip";
-import { site } from "@/lib/site";
+import { resolveSiteUrl } from "@/lib/site-url";
 import type { Metadata } from "next";
 
+const homeUrl = new URL("/", resolveSiteUrl()).href;
+
 export const metadata: Metadata = {
-  title: "Premium mobile detailing",
-  description: site.description,
+  alternates: { canonical: homeUrl },
+  openGraph: { url: homeUrl },
 };
 
 export default function HomePage() {

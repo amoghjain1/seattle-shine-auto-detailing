@@ -7,6 +7,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { BackToTop } from "@/components/back-to-top";
 import { MobileBookingBar } from "@/components/mobile-booking-bar";
 import { site } from "@/lib/site";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -19,44 +20,6 @@ const fraunces = Fraunces({
   subsets: ["latin"],
   display: "swap",
 });
-
-function normalizeSiteUrl(raw: string): string {
-  const withScheme = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
-  return withScheme.replace(/\/$/, "");
-}
-
-function resolveSiteUrl(): string {
-  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-  const currentHost = process.env.VERCEL_URL;
-  const isVercelProd = process.env.VERCEL_ENV === "production";
-
-  // Production: never bake a one-off *.vercel.app deployment host into metadata —
-  // NEXT_PUBLIC_* can match the deployment URL while VERCEL_URL differs at build time.
-  if (isVercelProd && productionHost) {
-    if (!explicit) {
-      return normalizeSiteUrl(productionHost);
-    }
-    try {
-      const host = new URL(normalizeSiteUrl(explicit)).hostname.toLowerCase();
-      if (host.endsWith(".vercel.app")) {
-        return normalizeSiteUrl(productionHost);
-      }
-    } catch {
-      /* use explicit below */
-    }
-  }
-
-  if (explicit) {
-    return normalizeSiteUrl(explicit);
-  }
-
-  if (currentHost) {
-    return normalizeSiteUrl(currentHost);
-  }
-
-  return "http://localhost:3000";
-}
 
 const siteUrl = resolveSiteUrl();
 
