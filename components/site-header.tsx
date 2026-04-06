@@ -3,14 +3,17 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { Container } from "@/components/container";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/cn";
+import { contactHref } from "@/lib/tracking-links";
 
 const nav = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
+  { href: "/areas", label: "Areas" },
   { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Book" },
@@ -18,6 +21,7 @@ const nav = [
 
 export function SiteHeader({ className }: { className?: string }) {
   const reduce = useReducedMotion();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -63,15 +67,18 @@ export function SiteHeader({ className }: { className?: string }) {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <motion.div
-            className="hidden sm:inline-flex"
+            className="inline-flex"
             whileHover={reduce ? undefined : { scale: 1.03 }}
             whileTap={reduce ? undefined : { scale: 0.97 }}
           >
             <Link
-              href="/contact"
-              className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground shadow-glow transition hover:brightness-110"
+              href={contactHref({
+                source: "site_header",
+                content: "header_quote_cta",
+              })}
+              className="rounded-full bg-accent px-3 py-2 text-xs font-semibold text-accent-foreground shadow-glow transition hover:brightness-110 sm:px-4 sm:text-sm"
             >
-              Book now
+              Get quote
             </Link>
           </motion.div>
         </div>
@@ -80,12 +87,17 @@ export function SiteHeader({ className }: { className?: string }) {
         className="flex border-t border-border/40 px-2 pb-2 md:hidden"
         aria-label="Mobile"
       >
-        <div className="flex w-full justify-between gap-1 overflow-x-auto">
+        <div className="flex w-full justify-between gap-1 overflow-x-auto pt-1">
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="shrink-0 rounded-lg px-2 py-2 text-xs font-medium text-muted"
+              className={cn(
+                "shrink-0 rounded-xl px-3 py-2.5 text-xs font-medium transition",
+                pathname === item.href
+                  ? "bg-surface text-foreground"
+                  : "text-muted hover:bg-surface/70 hover:text-foreground",
+              )}
             >
               {item.label}
             </Link>

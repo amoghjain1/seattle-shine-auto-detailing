@@ -39,12 +39,12 @@ export function HomeResultsCta() {
               Proof of work
             </p>
             <h2 className="mt-2 font-display text-3xl font-semibold text-foreground sm:text-4xl">
-              See paint, glass, and interiors after a proper detail
+              See what your vehicle can look like after one appointment
             </h2>
             <p className="mt-4 text-muted">
-              Browse the gallery for photos and short detail clips — newest
-              posts sync when Instagram is connected, or use the manual gallery
-              from your env config.
+              Browse real client photos and detail clips from Seattle Shine
+              appointments. We keep the gallery live through Instagram and a
+              curated local portfolio fallback.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <motion.div whileHover={reduce ? undefined : { scale: 1.02 }} whileTap={reduce ? undefined : { scale: 0.98 }}>
@@ -52,7 +52,7 @@ export function HomeResultsCta() {
                   href="/gallery"
                   className="inline-flex rounded-full bg-accent px-8 py-3 text-sm font-semibold text-accent-foreground shadow-glow"
                 >
-                  Open gallery
+                  View gallery
                 </Link>
               </motion.div>
               <motion.div whileHover={reduce ? undefined : { scale: 1.02 }} whileTap={reduce ? undefined : { scale: 0.98 }}>
@@ -76,9 +76,9 @@ export function HomeResultsCta() {
           >
             {[
               "Before / after stills",
-              "Detail clips & slider",
-              "Instagram permalinks",
-              "Updated on revalidate",
+              "Real local appointments",
+              "Interior + exterior proof",
+              "Updated portfolio",
             ].map((label, i) => (
               <motion.li
                 key={label}

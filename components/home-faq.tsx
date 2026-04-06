@@ -3,27 +3,8 @@
 import { useId, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Container } from "@/components/container";
-import { site } from "@/lib/site";
+import { HOME_FAQS } from "@/lib/faqs";
 import { cn } from "@/lib/cn";
-
-const faqs = [
-  {
-    q: "How does mobile detailing work?",
-    a: "We roll up to your location and use your water and power hookups. We walk the vehicle with you, set expectations, then work carefully with our own towels, tools, and products matched to your paint and interior.",
-  },
-  {
-    q: "Can I drop off instead?",
-    a: "Yes — drop-offs are by appointment. We will confirm timing and what to expect for handoff and pickup when you request a quote.",
-  },
-  {
-    q: "What areas do you serve?",
-    a: `Home base in Bothell. We regularly serve ${site.servedAreas}.`,
-  },
-  {
-    q: "How do I get pricing?",
-    a: "Packages on the Services page are a starting point; every job gets a quick quote based on condition, size, and add-ons. Photos help us recommend the right package.",
-  },
-] as const;
 
 export function HomeFaq() {
   const reduce = useReducedMotion();
@@ -51,7 +32,7 @@ export function HomeFaq() {
           </p>
         </motion.div>
         <ul className="mt-12 space-y-3">
-          {faqs.map((item, i) => {
+          {HOME_FAQS.map((item, i) => {
             const isOpen = open === i;
             const panelId = `${baseId}-panel-${i}`;
             const buttonId = `${baseId}-btn-${i}`;

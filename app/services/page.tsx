@@ -6,6 +6,7 @@ import { AddOnCards } from "@/components/add-on-cards";
 import { ServicesHeroMotion } from "@/components/services-page-client";
 import { packages } from "@/lib/packages";
 import { site } from "@/lib/site";
+import { contactHref } from "@/lib/tracking-links";
 
 export const metadata: Metadata = {
   title: "Services & pricing",
@@ -23,10 +24,11 @@ export default function ServicesPage() {
           Packages built for real-world drivers
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-muted">
-          Every detail starts with inspection and honest expectations — especially
-          for mobile work using your water and power, or when you drop off by
-          appointment. Pricing below is placeholder until you finalize rates;
-          tap <strong className="text-foreground">Quick quote</strong> anytime.
+          Every detail starts with inspection and honest expectations -
+          especially for mobile work using your water and power, or when you
+          drop off by appointment. We do not post fixed pricing because every
+          vehicle condition is different. Tap{" "}
+          <strong className="text-foreground">Get a free quote</strong> anytime.
         </p>
       </ServicesHeroMotion>
 
@@ -65,7 +67,10 @@ export default function ServicesPage() {
               Send photos and we will recommend a package.
             </p>
             <Link
-              href="/contact"
+              href={contactHref({
+                source: "services_page",
+                content: "addons_not_sure_cta",
+              })}
               className="mt-6 inline-flex rounded-full bg-accent px-8 py-3 text-sm font-semibold text-accent-foreground"
             >
               Get a free quote

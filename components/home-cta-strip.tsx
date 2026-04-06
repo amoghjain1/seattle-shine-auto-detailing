@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { Container } from "@/components/container";
 import { site } from "@/lib/site";
+import { contactHref } from "@/lib/tracking-links";
 
 export function HomeCtaStrip() {
   const reduce = useReducedMotion();
@@ -46,10 +47,13 @@ export function HomeCtaStrip() {
         >
           <motion.div whileHover={reduce ? undefined : { scale: 1.03 }} whileTap={reduce ? undefined : { scale: 0.98 }}>
             <Link
-              href="/contact"
+              href={contactHref({
+                source: "homepage",
+                content: "bottom_cta_strip_primary",
+              })}
               className="inline-flex rounded-full bg-accent px-8 py-3 text-sm font-semibold text-accent-foreground shadow-glow"
             >
-              Book your detail
+              Get a free quote
             </Link>
           </motion.div>
           <motion.div whileHover={reduce ? undefined : { scale: 1.03 }} whileTap={reduce ? undefined : { scale: 0.98 }}>
@@ -61,6 +65,14 @@ export function HomeCtaStrip() {
             >
               Follow on Instagram
             </a>
+          </motion.div>
+          <motion.div whileHover={reduce ? undefined : { scale: 1.03 }} whileTap={reduce ? undefined : { scale: 0.98 }}>
+            <Link
+              href="/areas"
+              className="inline-flex rounded-full border border-border px-8 py-3 text-sm font-semibold text-foreground transition hover:bg-background"
+            >
+              Areas we serve
+            </Link>
           </motion.div>
         </motion.div>
       </Container>

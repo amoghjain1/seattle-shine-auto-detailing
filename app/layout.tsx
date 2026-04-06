@@ -8,6 +8,7 @@ import { BackToTop } from "@/components/back-to-top";
 import { MobileBookingBar } from "@/components/mobile-booking-bar";
 import { site } from "@/lib/site";
 import { resolveSiteUrl } from "@/lib/site-url";
+import { HOME_FAQS } from "@/lib/faqs";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -30,11 +31,38 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
+  keywords: [
+    "auto detailing Seattle",
+    "mobile detailing Bothell",
+    "car detailing Everett",
+    "car detailing Renton",
+    "ceramic coating Seattle",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
+    url: siteUrl,
     title: site.tagline,
     description: site.description,
+    siteName: site.name,
+    images: ["/opengraph-image"],
     type: "website",
     locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.tagline,
+    description: site.description,
+    images: ["/twitter-image"],
   },
 };
 
@@ -68,6 +96,18 @@ export default function RootLayout({
     url: siteUrl,
     sameAs: [site.instagramUrl],
   };
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: HOME_FAQS.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
 
   return (
     <html
@@ -80,6 +120,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(localBusinessJsonLd),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqJsonLd),
           }}
         />
         <ThemeProvider>

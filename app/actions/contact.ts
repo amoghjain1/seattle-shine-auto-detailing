@@ -14,6 +14,12 @@ function isPackageId(v: string): v is PackageId {
   return v === "limited-protection" || v === "ultimate-protection";
 }
 
+function trackingValue(formData: FormData, key: string): string {
+  const raw = String(formData.get(key) ?? "").trim();
+  if (!raw) return "";
+  return raw.slice(0, 120);
+}
+
 export async function submitContact(
   _prev: ContactState,
   formData: FormData,
@@ -26,6 +32,10 @@ export async function submitContact(
   const serviceType = String(formData.get("serviceType") ?? "").trim();
   const notes = String(formData.get("notes") ?? "").trim();
   const addOnRaw = formData.getAll("addOn").map((v) => String(v).trim());
+  const utmSource = trackingValue(formData, "utm_source");
+  const utmMedium = trackingValue(formData, "utm_medium");
+  const utmCampaign = trackingValue(formData, "utm_campaign");
+  const utmContent = trackingValue(formData, "utm_content");
 
   if (!name || !email || !phone) {
     return { ok: false, message: "Please fill in name, email, and phone." };
@@ -73,6 +83,12 @@ export async function submitContact(
         ? "Drop-off at my home — Seattle Shine owner (by appointment)"
         : "Mobile at your location — you as the client (we use your water & power hookups)"
     }`,
+    "",
+    "Attribution:",
+    `UTM source: ${utmSource || "—"}`,
+    `UTM medium: ${utmMedium || "—"}`,
+    `UTM campaign: ${utmCampaign || "—"}`,
+    `UTM content: ${utmContent || "—"}`,
     "",
     notes ? `Notes:\n${notes}` : "",
   ].join("\n");

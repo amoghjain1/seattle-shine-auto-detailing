@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Container } from "@/components/container";
 import { HeroVideoBackdrop } from "@/components/hero-video-backdrop";
-import { site } from "@/lib/site";
+import { contactHref } from "@/lib/tracking-links";
 
 const container = {
   hidden: { opacity: 0 },
@@ -24,10 +25,19 @@ const item = {
 };
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 40]);
 
   return (
-    <section className="relative min-h-[85vh] overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative min-h-[78svh] overflow-hidden sm:min-h-[85vh]"
+    >
       <div className="absolute inset-0 z-0">
         <HeroVideoBackdrop />
       </div>
@@ -35,69 +45,82 @@ export function Hero() {
         className="absolute inset-0 z-[1]"
         style={{ background: "var(--hero-scrim)" }}
       />
-      <Container className="relative z-[2] flex min-h-[85vh] flex-col justify-center py-24">
+      <Container className="relative z-[2] flex min-h-[78svh] flex-col justify-center py-16 sm:min-h-[85vh] sm:py-24">
         <motion.div
+          style={{ y: contentY }}
           variants={reduce ? undefined : container}
           initial={reduce ? { opacity: 0, y: 20 } : "hidden"}
           animate={reduce ? { opacity: 1, y: 0 } : "show"}
           transition={
             reduce ? { duration: 0.45, ease: "easeOut" } : undefined
           }
-          className="max-w-3xl space-y-8"
+          className="max-w-3xl space-y-6 sm:space-y-7"
         >
           <motion.p
             variants={reduce ? undefined : item}
-            className="text-sm font-medium uppercase tracking-[0.2em] text-accent"
+            className="w-fit rounded-full border border-white/20 bg-black/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#f4ddbb] backdrop-blur-sm"
           >
-            Based in Bothell · Greater Seattle
+            Everett to Renton · Mobile + Drop-Off
           </motion.p>
           <motion.h1
             variants={reduce ? undefined : item}
-            className="font-display text-4xl font-semibold leading-tight tracking-tight text-[#faf6ef] sm:text-5xl lg:text-6xl"
+            className="font-display text-4xl font-semibold leading-[0.98] tracking-tight text-[#faf6ef] sm:text-6xl lg:text-7xl"
           >
-            {site.tagline}
+            Seattle's premium detail without the guesswork.
           </motion.h1>
           <motion.p
             variants={reduce ? undefined : item}
-            className="max-w-xl text-lg leading-relaxed text-[#e8e0d4] sm:text-xl"
+            className="max-w-2xl text-base leading-relaxed text-[#efe4d3] sm:text-xl"
           >
-            {site.description}
+            Deep interior reset. Glossy, protected paint. Honest quote based on
+            your vehicle condition and size. Trusted by repeat clients across
+            King and Snohomish County.
           </motion.p>
+          <motion.ul
+            variants={reduce ? undefined : item}
+            className="grid max-w-2xl gap-2 text-sm text-[#e6d6bf] sm:grid-cols-3"
+          >
+            <li className="rounded-xl border border-white/15 bg-black/25 px-3 py-2">
+              30+ vehicles detailed
+            </li>
+            <li className="rounded-xl border border-white/15 bg-black/25 px-3 py-2">
+              3rd year in business
+            </li>
+            <li className="rounded-xl border border-white/15 bg-black/25 px-3 py-2">
+              Fast quote turnaround
+            </li>
+          </motion.ul>
           <motion.div
             variants={reduce ? undefined : item}
-            className="flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+            className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap"
           >
             <motion.div
               whileHover={reduce ? undefined : { scale: 1.03, y: -2 }}
               whileTap={reduce ? undefined : { scale: 0.98 }}
             >
               <Link
-                href="/contact"
-                className="inline-flex items-center justify-center rounded-full bg-accent px-8 py-3.5 text-center text-sm font-semibold text-accent-foreground shadow-glow transition hover:brightness-110"
-              >
-                Book your detail
-              </Link>
-            </motion.div>
-            <motion.div
-              whileHover={reduce ? undefined : { scale: 1.03, y: -2 }}
-              whileTap={reduce ? undefined : { scale: 0.98 }}
-            >
-              <Link
-                href="/contact?package=limited-protection"
-                className="inline-flex items-center justify-center rounded-full border border-white/25 bg-white/5 px-8 py-3.5 text-center text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/10"
+                href={contactHref({
+                  source: "homepage",
+                  content: "hero_primary",
+                  packageId: "limited-protection",
+                })}
+                className="inline-flex min-w-[220px] items-center justify-center rounded-full bg-accent px-9 py-4 text-center text-base font-semibold text-accent-foreground shadow-glow transition hover:brightness-110"
               >
                 Get a free quote
               </Link>
             </motion.div>
             <motion.div
-              whileHover={reduce ? undefined : { x: 3 }}
+              whileHover={reduce ? undefined : { scale: 1.03, y: -2 }}
               whileTap={reduce ? undefined : { scale: 0.98 }}
             >
               <Link
-                href="/services"
-                className="inline-flex items-center justify-center rounded-full px-8 py-3.5 text-center text-sm font-semibold text-white/90 underline-offset-4 hover:underline"
+                href={contactHref({
+                  source: "homepage",
+                  content: "hero_secondary",
+                })}
+                className="inline-flex min-w-[160px] items-center justify-center rounded-full border border-white/30 bg-white/10 px-8 py-4 text-center text-base font-semibold text-white backdrop-blur-sm transition hover:bg-white/20"
               >
-                View services →
+                Book now
               </Link>
             </motion.div>
           </motion.div>

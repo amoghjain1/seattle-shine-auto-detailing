@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ADD_ON_OPTIONS } from "@/lib/packages";
+import { contactHref } from "@/lib/tracking-links";
 
 export function AddOnCards() {
   const reduce = useReducedMotion();
@@ -21,10 +22,14 @@ export function AddOnCards() {
         >
           <span className="text-sm font-medium text-foreground">{o.label}</span>
           <Link
-            href={`/contact?addOn=${o.id}`}
+            href={contactHref({
+              source: "services_page",
+              content: `addon_${o.id}`,
+              addOnId: o.id,
+            })}
             className="shrink-0 rounded-full bg-accent/15 px-4 py-2 text-xs font-semibold text-accent"
           >
-            Quote
+            Add to quote
           </Link>
         </motion.li>
       ))}

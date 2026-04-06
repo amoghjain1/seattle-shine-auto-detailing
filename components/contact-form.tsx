@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { submitContact } from "@/app/actions/contact";
 import {
   contactInitialState,
@@ -23,11 +24,19 @@ const packageChoices = [
 export function ContactForm({
   defaultPackage = "",
   defaultAddOnIds = [],
+  attribution = {},
 }: {
   defaultPackage?: string;
   /** Pre-check add-ons from e.g. `?addOn=carpet-shampoo` */
   defaultAddOnIds?: string[];
+  attribution?: {
+    utmSource?: string;
+    utmMedium?: string;
+    utmCampaign?: string;
+    utmContent?: string;
+  };
 }) {
+  const router = useRouter();
   const defaultAddOnSet = new Set(defaultAddOnIds);
 
   const [state, formAction, pending] = useActionState<
@@ -36,14 +45,26 @@ export function ContactForm({
   >(submitContact, contactInitialState);
 
   useEffect(() => {
-    if (state.ok && state.message) {
+    if (state.ok) {
+      router.push("/thank-you");
+      return;
+    }
+    if (state.message) {
       const el = document.getElementById("contact-status");
       el?.focus();
     }
-  }, [state.ok, state.message]);
+  }, [router, state.ok, state.message]);
 
   return (
     <form action={formAction} className="mx-auto max-w-xl space-y-6">
+      <input type="hidden" name="utm_source" value={attribution.utmSource ?? ""} />
+      <input type="hidden" name="utm_medium" value={attribution.utmMedium ?? ""} />
+      <input
+        type="hidden"
+        name="utm_campaign"
+        value={attribution.utmCampaign ?? ""}
+      />
+      <input type="hidden" name="utm_content" value={attribution.utmContent ?? ""} />
       <div
         id="contact-status"
         tabIndex={-1}
@@ -66,6 +87,7 @@ export function ContactForm({
             required
             name="name"
             autoComplete="name"
+            placeholder="Your full name"
             className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none ring-accent/30 placeholder:text-muted focus:ring-2"
           />
         </label>
@@ -76,6 +98,7 @@ export function ContactForm({
             type="email"
             name="email"
             autoComplete="email"
+            placeholder="you@example.com"
             className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none ring-accent/30 placeholder:text-muted focus:ring-2"
           />
         </label>
@@ -88,6 +111,7 @@ export function ContactForm({
           type="tel"
           name="phone"
           autoComplete="tel"
+          placeholder="(425) 555-1234"
           className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none ring-accent/30 focus:ring-2"
         />
       </label>
@@ -197,7 +221,7 @@ export function ContactForm({
         disabled={pending}
         className="w-full rounded-full bg-accent py-3.5 text-center text-sm font-semibold text-accent-foreground shadow-glow transition hover:brightness-110 disabled:opacity-60 sm:w-auto sm:px-10"
       >
-        {pending ? "Sending…" : "Send request"}
+        {pending ? "Sending..." : "Get my free quote"}
       </button>
     </form>
   );

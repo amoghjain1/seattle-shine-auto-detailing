@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/cn";
 import type { PackageId } from "@/lib/packages";
+import { contactHref } from "@/lib/tracking-links";
 
 export function PricingCard({
   name,
@@ -62,13 +63,20 @@ export function PricingCard({
       </ul>
       <div className="mt-8 flex flex-col gap-2 sm:flex-row">
         <Link
-          href={`/contact?package=${packageId}`}
+          href={contactHref({
+            source: "services_page",
+            content: `service_package_${packageId}_primary`,
+            packageId,
+          })}
           className="inline-flex flex-1 items-center justify-center rounded-full bg-accent py-3 text-center text-sm font-semibold text-accent-foreground transition hover:brightness-110"
         >
-          Quick quote
+          Get a free quote
         </Link>
         <Link
-          href="/contact"
+          href={contactHref({
+            source: "services_page",
+            content: `service_package_${packageId}_secondary`,
+          })}
           className="inline-flex flex-1 items-center justify-center rounded-full border border-border py-3 text-center text-sm font-semibold text-foreground transition hover:bg-surface"
         >
           Book now

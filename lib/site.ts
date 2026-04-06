@@ -7,13 +7,13 @@ export const site = {
   phoneTel: "+14252873622",
   email: "seattleshine1@gmail.com",
   tagline:
-    "Premium Auto Detailing in Seattle, WA. We Bring the Shine to You.",
+    "Your car should feel brand new every time you drive it.",
   description:
-    "High school detailer based in Bothell — interior resets, protective sealants, and ceramic coatings with show-ready results at pricing that makes sense for local families. Serving Seattle, the Eastside, Woodinville, Everett, Lynnwood, Bellevue, Redmond, and nearby.",
+    "Premium mobile and drop-off detailing from a trusted local specialist. We restore interiors, elevate gloss, and protect your finish with meticulous prep and quote-based packages built around your vehicle's condition.",
   serviceArea:
-    "Bothell, WA — serving Seattle, the Eastside, Woodinville, Everett, Lynnwood, Bellevue, Redmond, and nearby.",
+    "Bothell, WA - serving Everett to Renton, plus Seattle, the Eastside, Woodinville, Lynnwood, Bellevue, Redmond, and nearby.",
   /** Cities / region copy (without the “based in” prefix) */
   servedAreas:
-    "Seattle, the Eastside, Woodinville, Everett, Lynnwood, Bellevue, Redmond, and nearby areas",
+    "Everett, Seattle, Renton, the Eastside, Woodinville, Lynnwood, Bellevue, Redmond, and nearby areas",
   copyrightYear: 2026,
 } as const;

@@ -21,7 +21,14 @@ const validPackages: Record<string, PackageId> = {
 };
 
 type Props = {
-  searchParams: Promise<{ package?: string; addOn?: string | string[] }>;
+  searchParams: Promise<{
+    package?: string;
+    addOn?: string | string[];
+    utm_source?: string;
+    utm_medium?: string;
+    utm_campaign?: string;
+    utm_content?: string;
+  }>;
 };
 
 function parseAddOnQuery(
@@ -46,6 +53,12 @@ export default async function ContactPage({ searchParams }: Props) {
       ? mapped
       : "";
   const defaultAddOnIds = parseAddOnQuery(sp.addOn);
+  const attribution = {
+    utmSource: sp.utm_source?.trim() || "",
+    utmMedium: sp.utm_medium?.trim() || "",
+    utmCampaign: sp.utm_campaign?.trim() || "",
+    utmContent: sp.utm_content?.trim() || "",
+  };
 
   return (
     <>
@@ -69,6 +82,17 @@ export default async function ContactPage({ searchParams }: Props) {
             </a>
             .
           </p>
+          <div className="mt-6 inline-flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-wide text-muted">
+            <span className="rounded-full border border-border bg-background px-3 py-1.5">
+              Fast quote response
+            </span>
+            <span className="rounded-full border border-border bg-background px-3 py-1.5">
+              No fixed pricing traps
+            </span>
+            <span className="rounded-full border border-border bg-background px-3 py-1.5">
+              Everett to Renton coverage
+            </span>
+          </div>
         </Container>
       </section>
       <section className="py-16 sm:py-20">
@@ -76,6 +100,7 @@ export default async function ContactPage({ searchParams }: Props) {
           <ContactForm
             defaultPackage={defaultPackage}
             defaultAddOnIds={defaultAddOnIds}
+            attribution={attribution}
           />
         </Container>
       </section>
