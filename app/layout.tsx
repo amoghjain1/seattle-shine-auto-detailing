@@ -7,6 +7,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { BackToTop } from "@/components/back-to-top";
 import { MobileBookingBar } from "@/components/mobile-booking-bar";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { site } from "@/lib/site";
 import { resolveSiteUrl } from "@/lib/site-url";
 import { HOME_FAQS } from "@/lib/faqs";
@@ -139,6 +140,7 @@ export default function RootLayout({
           <MobileBookingBar />
         </ThemeProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
