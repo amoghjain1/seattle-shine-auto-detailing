@@ -26,13 +26,26 @@ const reasons = [
   },
 ];
 
+const slideDirections = [
+  { x: -20, y: 8 },
+  { x: 0, y: 18 },
+  { x: 20, y: 8 },
+  { x: 0, y: 18 },
+];
+
 export function HomeWhyChoose() {
   const reduce = useReducedMotion();
 
   return (
     <section className="border-t border-border/60 bg-surface/30 py-20">
       <Container>
-        <div className="mx-auto max-w-3xl text-center">
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 16 }}
+          whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+          className="mx-auto max-w-3xl text-center"
+        >
           <h2 className="font-display text-3xl font-semibold text-foreground sm:text-4xl">
             Why choose Seattle Shine
           </h2>
@@ -41,22 +54,26 @@ export function HomeWhyChoose() {
             paint-safe wash steps, and durable protection that still looks
             right weeks later. Serving {site.serviceArea}
           </p>
-        </div>
+        </motion.div>
         <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {reasons.map((item, i) => (
+          {reasons.map((r, i) => (
             <motion.li
-              key={item.title}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.4 }}
-              whileHover={reduce ? undefined : { y: -4, transition: { duration: 0.2 } }}
-              className="rounded-2xl border border-border/80 bg-background p-6 shadow-sm transition-shadow hover:shadow-md"
+              key={r.title}
+              initial={
+                reduce
+                  ? false
+                  : { opacity: 0, x: slideDirections[i].x, y: slideDirections[i].y }
+              }
+              whileInView={reduce ? undefined : { opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ delay: i * 0.08, duration: 0.5 }}
+              whileHover={reduce ? undefined : { y: -5, transition: { duration: 0.2 } }}
+              className="glass-card rounded-2xl p-6 transition-shadow hover:shadow-md"
             >
               <h3 className="font-display text-lg font-semibold text-foreground">
-                {item.title}
+                {r.title}
               </h3>
-              <p className="mt-2 text-sm text-muted">{item.body}</p>
+              <p className="mt-2 text-sm text-muted">{r.body}</p>
             </motion.li>
           ))}
         </ul>
@@ -72,7 +89,12 @@ export function HomePackageTeasers() {
     <section className="border-t border-border/60 py-20">
       <Container>
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
+          <motion.div
+            initial={reduce ? false : { opacity: 0, x: -20 }}
+            whileInView={reduce ? undefined : { opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5 }}
+          >
             <h2 className="font-display text-3xl font-semibold text-foreground sm:text-4xl">
               Choose your detail package
             </h2>
@@ -80,7 +102,7 @@ export function HomePackageTeasers() {
               Start with the package that fits your goals. We will fine-tune it
               after reviewing your vehicle photos and condition.
             </p>
-          </div>
+          </motion.div>
           <motion.div
             whileHover={reduce ? undefined : { scale: 1.02 }}
             whileTap={reduce ? undefined : { scale: 0.98 }}
@@ -98,15 +120,19 @@ export function HomePackageTeasers() {
           {packages.map((p, i) => (
             <motion.article
               key={p.id}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.06, duration: 0.45 }}
-              whileHover={reduce ? undefined : { y: -5, transition: { duration: 0.22 } }}
+              initial={
+                reduce
+                  ? false
+                  : { opacity: 0, x: i === 0 ? -24 : 24, y: 10 }
+              }
+              whileInView={reduce ? undefined : { opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ delay: i * 0.08, duration: 0.5 }}
+              whileHover={reduce ? undefined : { y: -6, transition: { duration: 0.22 } }}
               className={
                 p.featured
-                  ? "flex flex-col rounded-3xl border border-accent/55 bg-accent/[0.06] p-7 shadow-glow ring-1 ring-accent/20"
-                  : "flex flex-col rounded-3xl border border-border/80 bg-background p-7 shadow-sm"
+                  ? "glass-card-accent flex flex-col rounded-3xl p-7 ring-1 ring-accent/20"
+                  : "glass-card flex flex-col rounded-3xl p-7"
               }
             >
               <div className="mb-4 flex flex-wrap items-center gap-2">
@@ -133,7 +159,7 @@ export function HomePackageTeasers() {
                 {p.features.map((f) => (
                   <li key={f} className="flex gap-2">
                     <span className="text-accent" aria-hidden>
-                      •
+                      &bull;
                     </span>
                     <span>{f}</span>
                   </li>

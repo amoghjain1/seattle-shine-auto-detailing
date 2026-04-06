@@ -30,9 +30,9 @@ export function HomeCtaStrip() {
       />
       <Container className="relative flex flex-col items-center gap-6 text-center">
         <motion.p
-          initial={reduce ? false : { opacity: 0, y: 8 }}
+          initial={reduce ? false : { opacity: 0, y: 10 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.4 }}
           className="max-w-2xl text-sm text-muted"
         >
@@ -40,12 +40,12 @@ export function HomeCtaStrip() {
         </motion.p>
         <motion.div
           className="flex flex-wrap justify-center gap-3"
-          initial={reduce ? false : { opacity: 0, y: 10 }}
+          initial={reduce ? false : { opacity: 0, y: 14 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.06 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45, delay: 0.08 }}
         >
-          <motion.div whileHover={reduce ? undefined : { scale: 1.03 }} whileTap={reduce ? undefined : { scale: 0.98 }}>
+          <motion.div whileHover={reduce ? undefined : { scale: 1.04 }} whileTap={reduce ? undefined : { scale: 0.97 }}>
             <Link
               href={contactHref({
                 source: "homepage",
@@ -56,7 +56,7 @@ export function HomeCtaStrip() {
               Get a free quote
             </Link>
           </motion.div>
-          <motion.div whileHover={reduce ? undefined : { scale: 1.03 }} whileTap={reduce ? undefined : { scale: 0.98 }}>
+          <motion.div whileHover={reduce ? undefined : { scale: 1.04 }} whileTap={reduce ? undefined : { scale: 0.97 }}>
             <a
               href={site.instagramUrl}
               target="_blank"
@@ -66,7 +66,7 @@ export function HomeCtaStrip() {
               Follow on Instagram
             </a>
           </motion.div>
-          <motion.div whileHover={reduce ? undefined : { scale: 1.03 }} whileTap={reduce ? undefined : { scale: 0.98 }}>
+          <motion.div whileHover={reduce ? undefined : { scale: 1.04 }} whileTap={reduce ? undefined : { scale: 0.97 }}>
             <Link
               href="/areas"
               className="inline-flex rounded-full border border-border px-8 py-3 text-sm font-semibold text-foreground transition hover:bg-background"

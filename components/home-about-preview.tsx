@@ -2,40 +2,55 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Container } from "@/components/container";
 import { contactHref } from "@/lib/tracking-links";
 
 export function HomeAboutPreview() {
   const reduce = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], [20, reduce ? 0 : -20]);
 
   return (
-    <section className="border-t border-border/60 bg-background py-20">
+    <section ref={sectionRef} className="border-t border-border/60 bg-background py-20">
       <Container>
-        <div className="grid gap-8 lg:grid-cols-[320px_1fr] lg:items-center">
+        <div className="grid gap-8 lg:grid-cols-[340px_1fr] lg:items-center">
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 14 }}
-            whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45 }}
-            className="mx-auto w-full max-w-sm overflow-hidden rounded-3xl border border-border/80 bg-surface/40"
+            initial={reduce ? false : { opacity: 0, x: -30 }}
+            whileInView={reduce ? undefined : { opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.55 }}
+            className="relative mx-auto w-full max-w-sm overflow-hidden rounded-3xl"
           >
-            <div className="relative aspect-[4/5]">
+            <motion.div
+              style={{ y: imageY }}
+              className="relative aspect-[4/5]"
+            >
               <Image
                 src="/about/amogh-jain.png"
                 alt="Amogh Jain, founder of Seattle Shine Auto Detailing"
                 fill
-                sizes="(max-width: 1024px) 80vw, 320px"
+                sizes="(max-width: 1024px) 80vw, 340px"
                 className="object-cover"
               />
+            </motion.div>
+            {/* Frosted name overlay */}
+            <div className="absolute inset-x-0 bottom-0 bg-black/40 px-5 py-4 backdrop-blur-md">
+              <p className="text-sm font-semibold text-white">Amogh Jain</p>
+              <p className="text-xs text-white/70">Founder, Seattle Shine</p>
             </div>
           </motion.div>
 
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: 0.08 }}
+            initial={reduce ? false : { opacity: 0, x: 30 }}
+            whileInView={reduce ? undefined : { opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.55, delay: 0.1 }}
             className="max-w-2xl"
           >
             <p className="text-sm font-semibold uppercase tracking-wider text-accent">

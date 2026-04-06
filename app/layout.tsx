@@ -6,6 +6,9 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { BackToTop } from "@/components/back-to-top";
 import { MobileBookingBar } from "@/components/mobile-booking-bar";
+import { LenisProvider } from "@/components/lenis-provider";
+import { ScrollProgress } from "@/components/scroll-progress";
+import { FloatingCta } from "@/components/floating-cta";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { site } from "@/lib/site";
@@ -117,7 +120,7 @@ export default function RootLayout({
       className={`${dmSans.variable} ${fraunces.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="min-h-full flex flex-col font-sans" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -131,13 +134,17 @@ export default function RootLayout({
           }}
         />
         <ThemeProvider>
-          <SiteHeader />
-          <main className="flex-1 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-0">
-            {children}
-          </main>
-          <SiteFooter />
-          <BackToTop />
-          <MobileBookingBar />
+          <LenisProvider>
+            <ScrollProgress />
+            <SiteHeader />
+            <main className="flex-1 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-0">
+              {children}
+            </main>
+            <SiteFooter />
+            <BackToTop />
+            <MobileBookingBar />
+            <FloatingCta />
+          </LenisProvider>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

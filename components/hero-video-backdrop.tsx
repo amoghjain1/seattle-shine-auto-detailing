@@ -54,7 +54,7 @@ export function HeroVideoBackdrop() {
     <div className="absolute inset-0 z-0 bg-black">
       <video
         ref={videoRef}
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
+        className="pointer-events-none absolute inset-0 h-full w-full origin-center object-cover object-center animate-[kenburns_20s_ease-in-out_infinite_alternate]"
         autoPlay
         muted
         loop
