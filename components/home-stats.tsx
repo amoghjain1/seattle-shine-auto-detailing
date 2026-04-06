@@ -48,11 +48,13 @@ function CountUp({
   label: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [value, setValue] = useState(0);
+  const isInView = useInView(ref, { once: true });
+  const [value, setValue] = useState(target);
+  const started = useRef(false);
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView || started.current) return;
+    started.current = true;
     const duration = 900;
     const start = performance.now();
     let raf = 0;
@@ -65,6 +67,7 @@ function CountUp({
       }
     };
 
+    setValue(0);
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [isInView, target]);
