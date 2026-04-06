@@ -33,9 +33,13 @@ export function AboutBlockMotion({
 
   return (
     <motion.div
-      initial={reduce ? false : { opacity: 0, y: 16 }}
+      initial={reduce ? false : { opacity: 0, y: 12 }}
       whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
+      viewport={{
+        once: true,
+        amount: "some",
+        margin: "0px 0px 200px 0px",
+      }}
       transition={{ duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] as const }}
     >
       {children}

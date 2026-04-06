@@ -118,8 +118,9 @@ function ComparisonSlider({
 
   const handlePointerDown = useCallback(
     (e: React.PointerEvent) => {
+      e.preventDefault();
       isDragging.current = true;
-      (e.target as HTMLElement).setPointerCapture(e.pointerId);
+      containerRef.current?.setPointerCapture(e.pointerId);
       updateSlider(e.clientX);
     },
     [updateSlider],
@@ -140,11 +141,12 @@ function ComparisonSlider({
   return (
     <div
       ref={containerRef}
-      className="relative aspect-[4/3] cursor-col-resize select-none overflow-hidden rounded-2xl"
+      className="relative aspect-[4/3] cursor-col-resize select-none overflow-hidden rounded-2xl touch-none [&_img]:pointer-events-none [&_img]:select-none [&_img]:[-webkit-user-drag:none]"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
+      onDragStart={(e) => e.preventDefault()}
       role="slider"
       aria-label="Before after comparison"
       aria-valuemin={5}
@@ -161,6 +163,7 @@ function ComparisonSlider({
         src={pair.beforeSrc}
         alt={pair.beforeAlt}
         fill
+        draggable={false}
         sizes="(max-width: 1024px) 100vw, 55vw"
         className="object-cover"
       />
@@ -176,6 +179,7 @@ function ComparisonSlider({
             src={pair.afterSrc}
             alt={pair.afterAlt}
             fill
+            draggable={false}
             sizes="(max-width: 1024px) 100vw, 55vw"
             className="object-cover"
           />

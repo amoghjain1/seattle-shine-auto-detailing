@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Container } from "@/components/container";
 import { contactHref } from "@/lib/tracking-links";
+import { founderStoryTeaser } from "@/lib/about-story";
 
 export function HomeAboutPreview() {
   const reduce = useReducedMotion();
@@ -59,12 +60,7 @@ export function HomeAboutPreview() {
             <h2 className="mt-2 font-display text-3xl font-semibold text-foreground sm:text-4xl">
               Built by a local high schooler obsessed with the details
             </h2>
-            <p className="mt-4 text-muted">
-              I am Amogh. Seattle Shine is now in its 3rd year, with 30+ vehicles
-              detailed and repeat clients from Everett to Renton. I started this
-              to prove that premium care and honest service can still feel
-              personal, responsive, and reliable.
-            </p>
+            <p className="mt-4 text-muted">{founderStoryTeaser}</p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
                 href="/about"

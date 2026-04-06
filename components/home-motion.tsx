@@ -14,7 +14,7 @@ const reasons = [
   },
   {
     title: "Quote-first approach",
-    body: "No cookie-cutter pricing. We inspect condition, size, and add-ons, then give a clear quote before work starts.",
+    body: "No cookie-cutter pricing. We always ask for condition, size, and add-ons, then give a clear quote before work starts.",
   },
   {
     title: "Local, reliable coverage",
@@ -50,7 +50,7 @@ export function HomeWhyChoose() {
             Why choose Seattle Shine
           </h2>
           <p className="mt-4 text-lg text-muted">
-            We focus on the details most shops rush: interior reset quality,
+            We focus on details of your car most shops rush: every grain of sand,
             paint-safe wash steps, and durable protection that still looks
             right weeks later. Serving {site.serviceArea}
           </p>
@@ -131,8 +131,8 @@ export function HomePackageTeasers() {
               whileHover={reduce ? undefined : { y: -6, transition: { duration: 0.22 } }}
               className={
                 p.featured
-                  ? "glass-card-accent flex flex-col rounded-3xl p-7 ring-1 ring-accent/20"
-                  : "glass-card flex flex-col rounded-3xl p-7"
+                  ? "glass-card-accent flex h-full min-h-0 flex-col rounded-3xl p-7 ring-1 ring-accent/20"
+                  : "glass-card flex h-full min-h-0 flex-col rounded-3xl p-7"
               }
             >
               <div className="mb-4 flex flex-wrap items-center gap-2">
@@ -154,7 +154,7 @@ export function HomePackageTeasers() {
               <p className="mt-1 text-sm font-semibold text-foreground">
                 Final pricing depends on condition + vehicle size
               </p>
-              <p className="mt-3 flex-1 text-sm text-muted">{p.blurb}</p>
+              <p className="mt-3 text-sm text-muted">{p.blurb}</p>
               <ul className="mt-4 space-y-2 text-sm text-muted">
                 {p.features.map((f) => (
                   <li key={f} className="flex gap-2">
@@ -165,6 +165,7 @@ export function HomePackageTeasers() {
                   </li>
                 ))}
               </ul>
+              <div className="min-h-4 flex-1" aria-hidden />
               <div className="mt-6 flex flex-col gap-2 sm:flex-row">
                 <Link
                   href={contactHref({

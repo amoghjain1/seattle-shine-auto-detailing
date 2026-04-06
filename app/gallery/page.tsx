@@ -27,13 +27,8 @@ export default async function GalleryPage() {
             Real results from Bothell to Bellevue and beyond
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-muted">
-            Swipes from our shop floor and driveways across the metro — paint
-            clarity, interiors reset, and protection that lasts. The grid uses
-            Instagram Graph API or{" "}
-            <code className="rounded bg-surface px-1 text-sm">
-              INSTAGRAM_STATIC_GALLERY_JSON
-            </code>{" "}
-            when you configure them.
+            Pictures to videos from the floor of driveways across multiple details: reflective
+            paint, interiors reset, and protection that lasts.
           </p>
           {source === "graph" && (
             <p className="mt-4 inline-block rounded-full bg-accent/15 px-4 py-1 text-xs font-medium text-accent">
@@ -42,7 +37,7 @@ export default async function GalleryPage() {
           )}
           {source === "static" && (
             <p className="mt-4 inline-block rounded-full border border-border px-4 py-1 text-xs font-medium text-muted">
-              Manual gallery (INSTAGRAM_STATIC_GALLERY_JSON)
+              Featured photos
             </p>
           )}
           <a

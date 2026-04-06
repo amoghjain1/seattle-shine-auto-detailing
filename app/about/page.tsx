@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/container";
 import { AboutBlockMotion, AboutHeroMotion } from "@/components/about-page-motion";
 import { site } from "@/lib/site";
+import { founderStoryParagraphs } from "@/lib/about-story";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -23,31 +24,47 @@ export default function AboutPage() {
       </AboutHeroMotion>
 
       <section className="py-16 sm:py-20">
-        <Container className="mx-auto max-w-3xl space-y-10 text-muted">
+        <Container className="mx-auto flex max-w-3xl flex-col gap-8 text-muted">
           <AboutBlockMotion>
-          <div className="space-y-4">
+          <div className="space-y-3">
             <h2 className="font-display text-2xl font-semibold text-foreground">
-              Our story
+              My story
             </h2>
+            {founderStoryParagraphs.map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
+            ))}
             <p>
-              {site.name} started with a simple promise: treat every vehicle like
-              it is heading to a show — even if it is just going back to the
-              grocery run. We are a{" "}
-              <strong className="text-foreground">high school detailer</strong>{" "}
-              based in <strong className="text-foreground">Bothell</strong>, and
-              many families here choose a student-run detail for the same reason
-              they would hire a sharp neighbor:{" "}
-              <strong className="text-foreground">
-                better pricing than a full-scale shop, without giving up results
-              </strong>
-              — the same careful prep, products, and inspection-driven finish you
-              would expect from a premium service. We also serve{" "}
-              {site.servedAreas}.
+              If your car needs a refresh, check out my before-and-afters on{" "}
+              <a
+                href={site.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-accent underline-offset-4 hover:underline"
+              >
+                Instagram
+              </a>{" "}
+              or{" "}
+              <a
+                href={site.tiktokUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-accent underline-offset-4 hover:underline"
+              >
+                TikTok @{site.instagramHandle}
+              </a>
+              , or feel free to{" "}
+              <Link
+                href="/contact"
+                className="font-medium text-accent underline-offset-4 hover:underline"
+              >
+                message me here
+              </Link>
+              . Thanks for supporting a young local business!
             </p>
           </div>
           </AboutBlockMotion>
           <AboutBlockMotion delay={0.06}>
-          <div className="space-y-4">
+          <div className="space-y-3">
             <h2 className="font-display text-2xl font-semibold text-foreground">
               How we work with you
             </h2>
@@ -66,7 +83,7 @@ export default function AboutPage() {
           </div>
           </AboutBlockMotion>
           <AboutBlockMotion delay={0.1}>
-          <div className="space-y-4">
+          <div className="space-y-3">
             <h2 className="font-display text-2xl font-semibold text-foreground">
               Quality bar
             </h2>
@@ -78,7 +95,7 @@ export default function AboutPage() {
               <Link href="/services" className="font-medium text-accent">
                 protection packages
               </Link>{" "}
-              and ceramic-based sealants, we explain what to expect before we
+              and ceramic coatings, we explain what to expect before we
               begin.
             </p>
           </div>
@@ -89,7 +106,8 @@ export default function AboutPage() {
               Ready when you are.
             </p>
             <p className="mt-2 text-sm">
-              Book a detail, request a quote with photos, or DM us on Instagram.
+              Book a detail, request a quote with photos, or find us on Instagram
+              and TikTok.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
@@ -105,6 +123,14 @@ export default function AboutPage() {
                 className="rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground"
               >
                 @{site.instagramHandle}
+              </a>
+              <a
+                href={site.tiktokUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground"
+              >
+                TikTok
               </a>
             </div>
           </div>
