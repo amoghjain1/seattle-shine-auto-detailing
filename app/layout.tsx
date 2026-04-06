@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     url: siteUrl,
-    title: site.tagline,
+    title: `${site.shortName} · Boutique mobile & drop-off detailing`,
     description: site.description,
     siteName: site.name,
     images: ["/opengraph-image"],
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: site.tagline,
+    title: `${site.shortName} · Boutique mobile & drop-off detailing`,
     description: site.description,
     images: ["/twitter-image"],
   },
