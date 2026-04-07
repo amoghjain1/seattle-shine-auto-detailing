@@ -36,23 +36,25 @@ export function GalleryGrid({ items }: { items: InstagramMediaItem[] }) {
       {items.map((item) => {
         const src = imageSrc(item);
         return (
-          <li key={item.id}>
+          <li key={item.id} className="min-w-0">
             <a
               href={item.permalink}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative block aspect-square overflow-hidden rounded-2xl border border-border/80 bg-surface shadow-sm transition hover:border-accent/50"
+              className="group relative block overflow-hidden rounded-2xl border border-border/80 bg-surface shadow-sm transition hover:border-accent/50"
             >
               {src ? (
-                <Image
-                  src={src}
-                  alt={item.caption?.slice(0, 120) ?? "Instagram post"}
-                  fill
-                  className="object-cover transition duration-500 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 50vw, 33vw"
-                />
+                <div className="relative aspect-square w-full">
+                  <Image
+                    src={src}
+                    alt={item.caption?.slice(0, 120) ?? "Instagram post"}
+                    fill
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                    sizes="(max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
               ) : (
-                <span className="flex h-full items-center justify-center text-sm text-muted">
+                <span className="flex aspect-square items-center justify-center p-6 text-sm text-muted">
                   Open on Instagram
                 </span>
               )}
