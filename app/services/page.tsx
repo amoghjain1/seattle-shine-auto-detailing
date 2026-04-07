@@ -24,7 +24,7 @@ export default function ServicesPage() {
           Packages built for real-world drivers
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-muted">
-          Every detail starts with inspection and honest expectations -
+          Every detail starts with a quote and honest expectations -
           especially for mobile work using your water and power, or when you
           drop off by appointment. We do not post fixed pricing because every
           vehicle condition is different. Tap{" "}
