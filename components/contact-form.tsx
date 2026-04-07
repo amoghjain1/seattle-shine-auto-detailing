@@ -228,13 +228,15 @@ export function ContactForm({
                           : "glass-card hover:border-accent/30"
                       }`}
                     >
-                      <div className="flex items-center gap-2">
-                        <p className="text-sm font-semibold text-foreground">{p.name}</p>
-                        {p.featured && (
-                          <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold text-accent-foreground">
+                      <div className="flex items-start justify-between gap-3">
+                        <p className="min-w-0 flex-1 text-sm font-semibold leading-snug text-foreground">
+                          {p.name}
+                        </p>
+                        {p.featured ? (
+                          <span className="inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-accent px-2.5 py-1 text-center text-[10px] font-semibold leading-none text-accent-foreground">
                             Best value
                           </span>
-                        )}
+                        ) : null}
                       </div>
                       <p className="mt-1 text-xs text-muted">{p.subtitle}</p>
                     </button>
