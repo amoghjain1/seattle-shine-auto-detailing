@@ -7,8 +7,10 @@ import { Container } from "@/components/container";
 const proofSnippets = [
   'Ambreem: "Thanks for an amazing job! My kids are so excited and happy!"',
   'Carmen (repeat client): "I appreciate your response and attentiveness."',
-  'Madie: "It looks great!! Thanks again for being able to do this so soon!!"',
-  'Mike: "Great work and thanks again! Appreciate you working late."',
+  'Madie (Honda Civic): "It looks great!! Thanks again for being able to do this so soon!!"',
+  'Mike (Toyota Sienna): "Great work and thanks again! Appreciate you working late."',
+  'Toni (BMW X5): "My X5 looks incredible inside and out — I left a $50 tip because the job absolutely deserved it."',
+  'Raghavendra (Honda Odyssey & Nissan Altima, repeat client): "Amazing work, professional, car looks brand new. I am booked in for my 5th detail."',
 ] as const;
 
 function CountUp({

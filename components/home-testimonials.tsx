@@ -16,13 +16,31 @@ const testimonials = [
   },
   {
     name: "Madie",
-    vehicle: "Interior detail",
+    vehicle: "Honda Civic",
     quote: "It looks great!! Thanks again for being able to do this so soon!!",
   },
   {
     name: "Mike",
-    vehicle: "Evening appointment",
+    vehicle: "Toyota Sienna",
     quote: "Great work and thanks again! Appreciate you working late.",
+  },
+  {
+    name: "Toni",
+    vehicle: "BMW X5",
+    quote:
+      "Looks great inside and out, attention to detail was great. $50 tip for the job.",
+  },
+  {
+    name: "Raghavendra",
+    vehicle: "Repeat client — Honda Odyssey & Nissan Altima",
+    quote:
+      "Amazing work, professional, car looks brand new. I am booked in for my 5th detail.",
+  },
+  {
+    name: "Girish",
+    vehicle: "Mercedes-Benz GLC 300",
+    quote:
+      "Adaptive schedule. Respectful and easy to talk to.",
   },
 ] as const;
 
@@ -43,22 +61,16 @@ function TestimonialCard({
   item: (typeof testimonials)[number];
 }) {
   return (
-    <div className="glass-card relative w-[320px] shrink-0 rounded-2xl p-6 sm:w-[360px]">
-      <span
-        className="pointer-events-none absolute -top-2 left-5 font-display text-5xl leading-none text-accent/15"
-        aria-hidden
-      >
-        &ldquo;
-      </span>
+    <figure className="glass-card flex w-[320px] shrink-0 flex-col rounded-2xl p-6 sm:w-[360px]">
       <Stars />
-      <p className="mt-3 text-base leading-relaxed text-foreground">
-        &ldquo;{item.quote}&rdquo;
-      </p>
-      <div className="mt-4">
+      <blockquote className="mt-4 border-l-[3px] border-accent/50 pl-4">
+        <p className="text-base leading-relaxed text-foreground">{item.quote}</p>
+      </blockquote>
+      <figcaption className="mt-5 border-t border-border/50 pt-4">
         <p className="text-sm font-semibold text-foreground">{item.name}</p>
         <p className="text-xs text-muted">{item.vehicle}</p>
-      </div>
-    </div>
+      </figcaption>
+    </figure>
   );
 }
 
