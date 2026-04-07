@@ -203,7 +203,7 @@ export function ContactForm({
                       onClick={() => setServiceType(opt.value)}
                       className={`rounded-2xl p-4 text-left transition ${
                         serviceType === opt.value
-                          ? "glass-card-accent ring-1 ring-accent/40"
+                          ? "border-2 border-solid border-accent bg-accent/30 backdrop-blur-xl shadow-glow"
                           : "glass-card hover:border-accent/30"
                       }`}
                     >
@@ -224,7 +224,7 @@ export function ContactForm({
                       onClick={() => setSelectedPkg(p.id)}
                       className={`rounded-2xl p-4 text-left transition ${
                         selectedPkg === p.id
-                          ? "glass-card-accent ring-1 ring-accent/40"
+                          ? "border-2 border-solid border-accent bg-accent/30 backdrop-blur-xl shadow-glow"
                           : "glass-card hover:border-accent/30"
                       }`}
                     >
