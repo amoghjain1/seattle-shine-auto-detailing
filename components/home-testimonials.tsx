@@ -49,7 +49,7 @@ const row2 = [...[...testimonials].reverse(), ...[...testimonials].reverse(), ..
 
 function Stars() {
   return (
-    <p className="text-sm tracking-[0.15em] text-accent" aria-label="5 stars">
+    <p className="text-xs tracking-[0.12em] text-accent" aria-label="5 stars">
       {"\u2605\u2605\u2605\u2605\u2605"}
     </p>
   );
@@ -61,14 +61,14 @@ function TestimonialCard({
   item: (typeof testimonials)[number];
 }) {
   return (
-    <figure className="glass-card flex w-[320px] shrink-0 flex-col rounded-2xl p-6 sm:w-[360px]">
+    <figure className="glass-card flex w-[272px] shrink-0 flex-col rounded-xl px-4 py-3.5 sm:w-[292px]">
       <Stars />
-      <blockquote className="mt-4 border-l-[3px] border-accent/50 pl-4">
-        <p className="text-base leading-relaxed text-foreground">{item.quote}</p>
+      <blockquote className="mt-2 border-l-2 border-accent/50 pl-3">
+        <p className="text-sm leading-snug text-foreground">{item.quote}</p>
       </blockquote>
-      <figcaption className="mt-5 border-t border-border/50 pt-4">
-        <p className="text-sm font-semibold text-foreground">{item.name}</p>
-        <p className="text-xs text-muted">{item.vehicle}</p>
+      <figcaption className="mt-2.5 border-t border-border/40 pt-2.5">
+        <p className="text-sm font-semibold leading-tight text-foreground">{item.name}</p>
+        <p className="mt-0.5 text-[11px] leading-snug text-muted">{item.vehicle}</p>
       </figcaption>
     </figure>
   );
@@ -93,7 +93,7 @@ function Marquee({
       <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent sm:w-24" />
 
       <div
-        className="group flex w-max gap-4"
+        className="group flex w-max gap-3"
         style={
           reduce
             ? undefined
@@ -114,7 +114,7 @@ export function HomeTestimonials() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="border-t border-border/60 bg-background py-20 overflow-hidden">
+    <section className="border-t border-border/60 bg-background py-14 sm:py-16 overflow-hidden">
       <Container>
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 14 }}
@@ -132,7 +132,7 @@ export function HomeTestimonials() {
         </motion.div>
       </Container>
 
-      <div className="mt-10 space-y-4">
+      <div className="mt-8 space-y-3">
         <Marquee items={row1} direction="left" speed={28} />
         <Marquee items={row2} direction="right" speed={32} />
       </div>
