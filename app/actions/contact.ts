@@ -1,73 +1,64 @@
 "use server";
 
+import { headers } from "next/headers";
 import { Resend } from "resend";
 import type { ContactState } from "@/lib/contact-form-state";
-import { site } from "@/lib/site";
+import { parseContactFormFromFormData } from "@/lib/contact-form-schema";
+import { addOnLabel, packageLabel } from "@/lib/packages";
 import {
-  addOnLabel,
-  isValidAddOnId,
-  packageLabel,
-  type PackageId,
-} from "@/lib/packages";
-
-function isPackageId(v: string): v is PackageId {
-  return v === "limited-protection" || v === "ultimate-protection";
-}
-
-function trackingValue(formData: FormData, key: string): string {
-  const raw = String(formData.get(key) ?? "").trim();
-  if (!raw) return "";
-  return raw.slice(0, 120);
-}
+  clientIpFromHeaders,
+  getContactRatelimit,
+} from "@/lib/rate-limit";
+import { site } from "@/lib/site";
 
 export async function submitContact(
   _prev: ContactState,
   formData: FormData,
 ): Promise<ContactState> {
-  const name = String(formData.get("name") ?? "").trim();
-  const email = String(formData.get("email") ?? "").trim();
-  const phone = String(formData.get("phone") ?? "").trim();
-  const vehicle = String(formData.get("vehicle") ?? "").trim();
-  const packageRaw = String(formData.get("package") ?? "").trim();
-  const serviceType = String(formData.get("serviceType") ?? "").trim();
-  const notes = String(formData.get("notes") ?? "").trim();
-  const addOnRaw = formData.getAll("addOn").map((v) => String(v).trim());
-  const utmSource = trackingValue(formData, "utm_source");
-  const utmMedium = trackingValue(formData, "utm_medium");
-  const utmCampaign = trackingValue(formData, "utm_campaign");
-  const utmContent = trackingValue(formData, "utm_content");
-
-  if (!name || !email || !phone) {
-    return { ok: false, message: "Please fill in name, email, and phone." };
+  const parsed = parseContactFormFromFormData(formData);
+  if (!parsed.ok) {
+    return { ok: false, message: parsed.message };
   }
 
-  if (!vehicle) {
-    return { ok: false, message: "Please enter your vehicle make and model." };
-  }
+  const {
+    name,
+    email,
+    phone,
+    vehicle,
+    package: packageId,
+    serviceType,
+    notes,
+    addOnIds,
+    utmSource,
+    utmMedium,
+    utmCampaign,
+    utmContent,
+  } = parsed.data;
 
-  if (!isPackageId(packageRaw)) {
-    return {
-      ok: false,
-      message: "Please choose Full Detail Limited or Ultimate Protection.",
-    };
-  }
-
-  if (serviceType !== "mobile" && serviceType !== "dropoff") {
-    return { ok: false, message: "Please choose how you would like service." };
-  }
-
-  const addOnIds = [...new Set(addOnRaw)].filter(Boolean);
-  for (const id of addOnIds) {
-    if (!isValidAddOnId(id)) {
-      return { ok: false, message: "Invalid add-on selection." };
+  const limiter = getContactRatelimit();
+  if (limiter) {
+    try {
+      const h = await headers();
+      const ip = clientIpFromHeaders(h);
+      const { success } = await limiter.limit(`contact:${ip}`);
+      if (!success) {
+        return {
+          ok: false,
+          message:
+            "Too many requests. Please wait a few minutes and try again.",
+        };
+      }
+    } catch (err) {
+      console.warn("[contact] rate limit check failed — allowing request", err);
     }
   }
+
   const addOnLine =
     addOnIds.length === 0
       ? "None"
       : addOnIds.map((id) => addOnLabel(id) ?? id).join("; ");
 
-  const pkgLine = packageLabel(packageRaw);
+  const pkgLine = packageLabel(packageId);
 
   const body = [
     `New inquiry — ${site.name}`,
@@ -108,9 +99,6 @@ export async function submitContact(
 
   const from =
     process.env.RESEND_FROM_EMAIL ?? "Seattle Shine <onboarding@resend.dev>";
-  // Resend test sender only allows delivering to the account owner inbox; a
-  // customer `replyTo` triggers validation_error (403). Omit until you verify a
-  // domain and use a `from` on that domain.
   const sandboxFrom = /onboarding@resend\.dev/i.test(from);
 
   const resend = new Resend(apiKey);
@@ -132,6 +120,7 @@ export async function submitContact(
 
   return {
     ok: true,
-    message: "Thanks — we will get back to you shortly with availability and a quote.",
+    message:
+      "Thanks — we will get back to you shortly with availability and a quote.",
   };
 }

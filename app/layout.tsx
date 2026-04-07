@@ -14,6 +14,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { site } from "@/lib/site";
 import { resolveSiteUrl } from "@/lib/site-url";
 import { HOME_FAQS } from "@/lib/faqs";
+import { jsonLdStringify } from "@/lib/json-ld";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -124,13 +125,13 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessJsonLd),
+            __html: jsonLdStringify(localBusinessJsonLd),
           }}
         />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(faqJsonLd),
+            __html: jsonLdStringify(faqJsonLd),
           }}
         />
         <ThemeProvider>

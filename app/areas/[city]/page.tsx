@@ -5,6 +5,7 @@ import { Container } from "@/components/container";
 import { site } from "@/lib/site";
 import { resolveSiteUrl } from "@/lib/site-url";
 import { SERVICE_AREAS, areaBySlug } from "@/lib/areas";
+import { jsonLdStringify } from "@/lib/json-ld";
 
 type Props = {
   params: Promise<{ city: string }>;
@@ -60,7 +61,7 @@ export default async function AreaPage({ params }: Props) {
     <section className="py-16 sm:py-20">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(areaJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdStringify(areaJsonLd) }}
       />
       <Container className="max-w-4xl">
         <p className="text-sm font-semibold uppercase tracking-wider text-accent">
