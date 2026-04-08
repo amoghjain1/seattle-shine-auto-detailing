@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/container";
 import { AboutBlockMotion, AboutHeroMotion } from "@/components/about-page-motion";
+import {
+  founderSpotlightEyebrow,
+  founderSpotlightHeadline,
+  founderStoryParagraphs,
+  founderStoryTeaser,
+} from "@/lib/about-story";
 import { site } from "@/lib/site";
-import { founderStoryParagraphs } from "@/lib/about-story";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -22,6 +28,40 @@ export default function AboutPage() {
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-muted">{site.description}</p>
       </AboutHeroMotion>
+
+      <section className="border-b border-border/60 py-16 sm:py-20">
+        <Container>
+          <AboutBlockMotion>
+            <div className="grid gap-8 lg:grid-cols-[340px_1fr] lg:items-center">
+              <div className="relative mx-auto w-full max-w-sm overflow-hidden rounded-3xl">
+                <div className="relative aspect-[4/5]">
+                  <Image
+                    src="/about/amogh-jain.png"
+                    alt="Amogh Jain, founder of Seattle Shine Auto Detailing"
+                    fill
+                    sizes="(max-width: 1024px) 80vw, 340px"
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 bg-black/40 px-5 py-4 backdrop-blur-md">
+                  <p className="text-sm font-semibold text-white">Amogh Jain</p>
+                  <p className="text-xs text-white/70">Founder, Seattle Shine</p>
+                </div>
+              </div>
+              <div className="mx-auto max-w-2xl lg:mx-0">
+                <p className="text-sm font-semibold uppercase tracking-wider text-accent">
+                  {founderSpotlightEyebrow}
+                </p>
+                <h2 className="mt-2 font-display text-3xl font-semibold text-foreground sm:text-4xl">
+                  {founderSpotlightHeadline}
+                </h2>
+                <p className="mt-4 text-muted">{founderStoryTeaser}</p>
+              </div>
+            </div>
+          </AboutBlockMotion>
+        </Container>
+      </section>
 
       <section className="py-16 sm:py-20">
         <Container className="mx-auto flex max-w-3xl flex-col gap-8 text-muted">

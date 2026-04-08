@@ -1,3 +1,8 @@
+/** Homepage About section and /about founder spotlight (kept in sync). */
+export const founderSpotlightEyebrow = "Who is behind Seattle Shine" as const;
+export const founderSpotlightHeadline =
+  "Built by a local high schooler obsessed with the details" as const;
+
 /**
  * First-person founder story for /about (My story) and homepage About preview.
  */

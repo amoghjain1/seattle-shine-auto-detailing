@@ -6,7 +6,11 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Container } from "@/components/container";
 import { contactHref } from "@/lib/tracking-links";
-import { founderStoryTeaser } from "@/lib/about-story";
+import {
+  founderSpotlightEyebrow,
+  founderSpotlightHeadline,
+  founderStoryTeaser,
+} from "@/lib/about-story";
 
 export function HomeAboutPreview() {
   const reduce = useReducedMotion();
@@ -55,10 +59,10 @@ export function HomeAboutPreview() {
             className="max-w-2xl"
           >
             <p className="text-sm font-semibold uppercase tracking-wider text-accent">
-              Who is behind Seattle Shine
+              {founderSpotlightEyebrow}
             </p>
             <h2 className="mt-2 font-display text-3xl font-semibold text-foreground sm:text-4xl">
-              Built by a local high schooler obsessed with the details
+              {founderSpotlightHeadline}
             </h2>
             <p className="mt-4 text-muted">{founderStoryTeaser}</p>
             <div className="mt-7 flex flex-wrap gap-3">
