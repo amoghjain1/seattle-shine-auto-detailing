@@ -121,16 +121,16 @@ export function Hero() {
             variants={reduce ? undefined : item}
             className="font-display text-5xl font-semibold leading-[0.96] tracking-tight text-[#faf6ef] sm:text-7xl lg:text-8xl"
           >
-            Seattle&rsquo;s premium detail
+            Your Local
             <br />
-            <span className="text-accent">without the guesswork.</span>
+            <span className="text-accent">Detailing Service</span>
           </motion.h1>
 
           <motion.p
             variants={reduce ? undefined : item}
             className="max-w-2xl text-lg leading-relaxed text-[#efe4d3]/90 sm:text-xl"
           >
-            Deep interior reset. Glossy, protected paint. Honest quote based on
+            Whether it's a deep interior reset or you want shiny protected paint. At Seattle Shine we got you covered. Honest quote based on
             your vehicle condition and size. Trusted by repeat clients across
             King and Snohomish County.
           </motion.p>
