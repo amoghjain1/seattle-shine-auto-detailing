@@ -24,7 +24,7 @@ function CountUp({
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
-  const [value, setValue] = useState(target);
+  const [value, setValue] = useState(0);
   const started = useRef(false);
 
   useEffect(() => {
@@ -42,8 +42,6 @@ function CountUp({
         raf = requestAnimationFrame(tick);
       }
     };
-
-    setValue(0);
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [isInView, target]);

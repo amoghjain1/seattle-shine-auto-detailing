@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   motion,
   useReducedMotion,
@@ -31,16 +31,12 @@ export function MobileBookingBar() {
 
     if (y > heroThreshold && !pastHero) {
       setPastHero(true);
+      setPulsed(true);
     }
 
     lastScroll.current = y;
   });
 
-  useEffect(() => {
-    if (pastHero && !pulsed) {
-      setPulsed(true);
-    }
-  }, [pastHero, pulsed]);
 
   return (
     <AnimatePresence>

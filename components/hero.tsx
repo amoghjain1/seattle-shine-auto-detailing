@@ -130,7 +130,7 @@ export function Hero() {
             variants={reduce ? undefined : item}
             className="max-w-2xl text-lg leading-relaxed text-[#efe4d3]/90 sm:text-xl"
           >
-            Whether it's a deep interior reset or you want shiny protected paint. At Seattle Shine we got you covered. Honest quote based on
+            Whether it is a deep interior reset or you want shiny protected paint. At Seattle Shine we got you covered. Honest quote based on
             your vehicle condition and size. Trusted by repeat clients across
             King and Snohomish County.
           </motion.p>
