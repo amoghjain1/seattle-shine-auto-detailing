@@ -32,6 +32,10 @@ const siteUrl = resolveSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    apple: [{ url: "/icon.png", type: "image/png" }],
+  },
   title: {
     default: `${site.shortName} | ${site.name}`,
     template: `%s | ${site.name}`,
