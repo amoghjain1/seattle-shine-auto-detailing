@@ -91,8 +91,8 @@ export default async function OpenGraphImage() {
                 fontFamily: displayFont,
               }}
             >
-              Boutique detailing
-              <span style={{ color: gold, display: "flex" }}>for your daily driver</span>
+              Mobile detailing
+              <span style={{ color: gold, display: "flex" }}>for your top valued asset</span>
             </div>
             <div
               style={{
