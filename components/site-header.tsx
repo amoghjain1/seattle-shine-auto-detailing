@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
@@ -44,12 +45,23 @@ export function SiteHeader({ className }: { className?: string }) {
       <Container className="flex h-16 items-center justify-between gap-4">
         <Link
           href="/"
-          className="font-display text-lg font-semibold tracking-tight text-foreground sm:text-xl"
+          className="inline-flex items-center gap-2 font-display text-lg font-semibold tracking-tight text-foreground sm:text-xl"
         >
-          {site.shortName}
-          <span className="hidden font-sans text-xs font-normal text-muted sm:inline">
-            {" "}
-            · Auto Detailing
+          <span className="relative h-7 w-7 overflow-hidden rounded-full ring-1 ring-border/70 sm:h-8 sm:w-8">
+            <Image
+              src="/icon.png"
+              alt="Seattle Shine logo"
+              fill
+              sizes="(min-width: 640px) 32px, 28px"
+              className="object-cover"
+            />
+          </span>
+          <span>
+            {site.shortName}
+            <span className="hidden font-sans text-xs font-normal text-muted sm:inline">
+              {" "}
+              · Auto Detailing
+            </span>
           </span>
         </Link>
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
