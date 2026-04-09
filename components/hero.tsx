@@ -132,7 +132,7 @@ export function Hero() {
           >
             Whether it is a deep interior reset or you want shiny protected paint. At Seattle Shine we got you covered. Honest quote based on
             your vehicle condition and size. Trusted by repeat clients across
-            King and Snohomish County.
+            Snohomish and King County.
           </motion.p>
 
           <motion.ul
