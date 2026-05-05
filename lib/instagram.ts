@@ -242,6 +242,22 @@ const STATIC_GALLERY_FALLBACK: InstagramMediaItem[] = [
     permalink: site.instagramUrl,
     caption: "Ford Mustang three-quarter front view after detail",
   },
+  {
+    id: "portfolio-28",
+    mediaType: "IMAGE",
+    mediaUrl: "/gallery/portfolio-28.png",
+    thumbnailUrl: "/gallery/portfolio-28.png",
+    permalink: site.instagramUrl,
+    caption: "Honda Accord exterior after detail on a wet driveway",
+  },
+  {
+    id: "portfolio-29",
+    mediaType: "IMAGE",
+    mediaUrl: "/gallery/portfolio-29.png",
+    thumbnailUrl: "/gallery/portfolio-29.png",
+    permalink: site.instagramUrl,
+    caption: "Honda Accord front cabin interior after detail",
+  },
 ];
 
 export async function fetchInstagramFeed(): Promise<{
