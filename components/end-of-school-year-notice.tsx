@@ -22,9 +22,9 @@ export function EndOfSchoolYearNotice() {
       <div className="w-full max-w-lg rounded-2xl border border-border bg-background p-6 shadow-2xl">
         <h2 className="font-display text-2xl text-foreground">Availability Update</h2>
         <p className="mt-3 text-sm leading-6 text-muted">
-          With the school year coming to an end, Seattle Shine is not taking new clients
-          until after June 13. Feel free to get a quote now, but all appointments will be
-          scheduled after that date.
+          We are so sorry for the inconvenience. As the school year wraps up, Seattle
+          Shine is not taking new clients until after June 13. You are still welcome to
+          get a quote now, and we will schedule all appointments for dates after that.
         </p>
         <button
           type="button"
