@@ -9,7 +9,6 @@ import { MobileBookingBar } from "@/components/mobile-booking-bar";
 import { LenisProvider } from "@/components/lenis-provider";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { FloatingCta } from "@/components/floating-cta";
-import { EndOfSchoolYearNotice } from "@/components/end-of-school-year-notice";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { site } from "@/lib/site";
@@ -150,7 +149,6 @@ export default function RootLayout({
             <BackToTop />
             <MobileBookingBar />
             <FloatingCta />
-            <EndOfSchoolYearNotice />
           </LenisProvider>
         </ThemeProvider>
         <Analytics />
